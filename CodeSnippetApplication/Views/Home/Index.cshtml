@@ -1,0 +1,42 @@
+﻿@model CodeSnippetApplication.Models.CodeSnippet
+@section Scripts
+{
+<script>
+$(function () {
+    $("#snippetid").change(function () {
+        var selectedSnippetID = { snippetID: $(this).val() };
+        $.ajax({
+            url: '@Url.Action("GetCodeData","Home")',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(selectedSnippetID),
+            success: function (data) {
+                if (data.success) {
+                    $("#snippetcode").val(data.snippetCode);
+                } else {
+                    alert('invalid ID' + data.success);
+                }
+            }
+        });
+    });
+});
+</script>
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<form class="form-horizontal" action="/" method="post">
+    <div class="form-group">
+        <div class="col-md-3">
+            @Html.DropDownListFor(model => model.Id, (SelectList)ViewBag.SnippetList, "Select Code Snippet", new { id="snippetid", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-11">
+            @Html.TextArea("snippetcode", null, 25, 80, new { @class = "form-control" })
+        </div>
+    </div>
+</form>

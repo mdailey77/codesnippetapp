@@ -1,0 +1,34 @@
+﻿@model CodeSnippetApplication.Models.CodeSnippet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CodeSnippet</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SnippetName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SnippetName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SnippetCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SnippetCode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "EditList")
+</p>
